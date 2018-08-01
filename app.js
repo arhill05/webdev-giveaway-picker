@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const url =
-  'https://www.reddit.com/r/webdev/comments/92cezf/beginner_questions_july_27_2018/.json?depth=1';
+  'https://www.reddit.com/r/webdev/comments/93o4lf/august_2018_rwebdev_giveaway/.json?depth=1';
 
 getRandom = maxValue => {
   return Math.floor(Math.random() * Math.floor(maxValue));
