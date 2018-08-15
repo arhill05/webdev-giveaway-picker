@@ -1,7 +1,12 @@
 const axios = require('axios');
+const https = require('https');
+
+const instance = axios.create({
+  httpsAgent: new https.Agent({ rejectUnauthorized: false })
+});
 
 const url =
-  'https://www.reddit.com/r/webdev/comments/92cezf/beginner_questions_july_27_2018/.json?depth=1';
+  'https://www.reddit.com/r/webdev/comments/93o4lf/august_2018_rwebdev_giveaway/.json?depth=1';
 
 getRandom = maxValue => {
   return Math.floor(Math.random() * Math.floor(maxValue));
@@ -12,7 +17,12 @@ uniqueFilter = (val, index, arr) => {
 };
 
 getWinner = async () => {
-  const redditResponse = await axios(url);
+  let redditResponse = null;
+  try {
+    redditResponse = await instance.get(url);
+  } catch (err) {
+    console.log(err);
+  }
 
   let comments = redditResponse.data.map(listing =>
     listing.data.children.filter(child => child.kind === 't1')
